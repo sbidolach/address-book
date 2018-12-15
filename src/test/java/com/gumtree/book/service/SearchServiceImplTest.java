@@ -3,6 +3,7 @@ package com.gumtree.book.service;
 import com.gumtree.book.file.FileParser;
 import com.gumtree.book.model.AddressBook;
 import com.gumtree.book.model.Gender;
+import com.gumtree.book.utils.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,11 +24,11 @@ public class SearchServiceImplTest {
         fileParser = mock(FileParser.class);
         searchService = new SearchServiceImpl(fileParser);
         when(fileParser.readDataFromFile()).thenReturn(new ArrayList<AddressBook>(){{
-            add(new AddressBook("Bill McKnight", Gender.MALE, new Date()));
-            add(new AddressBook("Paul Robinson", Gender.MALE, new Date()));
-            add(new AddressBook("Gemma Lane", Gender.FEMALE, new Date()));
-            add(new AddressBook("Sarah Stone", Gender.FEMALE, new Date()));
-            add(new AddressBook("Wes Jackson", Gender.MALE, new Date()));
+            add(new AddressBook("Bill McKnight", Gender.MALE, DateUtils.parseDateString("16/03/77")));
+            add(new AddressBook("Paul Robinson", Gender.MALE, DateUtils.parseDateString("15/01/85")));
+            add(new AddressBook("Gemma Lane", Gender.FEMALE, DateUtils.parseDateString("20/11/91")));
+            add(new AddressBook("Sarah Stone", Gender.FEMALE, DateUtils.parseDateString("20/09/80")));
+            add(new AddressBook("Wes Jackson", Gender.MALE, DateUtils.parseDateString("14/08/74")));
         }});
     }
 
@@ -42,7 +43,7 @@ public class SearchServiceImplTest {
         assertNotNull(theOldestPerson);
         assertEquals("Wes Jackson", theOldestPerson.getFullName());
         assertEquals(Gender.MALE, theOldestPerson.getGender());
-        assertEquals(new Date(), theOldestPerson.getDateOfBirth());
+        assertEquals(DateUtils.parseDateString("14/08/74"), theOldestPerson.getDateOfBirth());
     }
 
     @Test
