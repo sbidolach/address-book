@@ -49,7 +49,9 @@ public class SearchServiceImpl implements SearchService {
         if (addressBooks.isEmpty()) {
             return null;
         } else {
-            Optional<AddressBook> addressBook = fileParser.readDataFromFile().stream().filter(a -> a.getFullName().equals(fullName)).findFirst();
+            Optional<AddressBook> addressBook = fileParser.readDataFromFile().stream()
+                    .filter(a -> a.getFullName().equals(fullName))
+                    .findFirst();
             if (!addressBook.isPresent()) {
                 throw new AddressBookNoFoundException();
             }

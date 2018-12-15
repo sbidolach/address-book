@@ -25,7 +25,4 @@ public class DateUtilsTest {
         assertNull(DateUtils.parseDateString("WRONG_DATE"));
     }
 
-    @Test
-    public void caculateDaysBetweenTwoDates() {
-    }
 }
