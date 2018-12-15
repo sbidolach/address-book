@@ -1,5 +1,6 @@
 package com.gumtree.book.service;
 
+import com.gumtree.book.exception.AddressBookNoFoundException;
 import com.gumtree.book.file.FileParser;
 import com.gumtree.book.model.AddressBook;
 import com.gumtree.book.model.Gender;
@@ -8,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -47,7 +47,19 @@ public class SearchServiceImplTest {
     }
 
     @Test
-    public void calculateDaysBetweenTwoPeopleDateOfBirthOK() {
+    public void findTheOldestPersonWhenAddressBookIsEmpty() {
+        when(fileParser.readDataFromFile()).thenReturn(new ArrayList<>());
+        AddressBook theOldestPerson = searchService.findTheOldestPerson();
+        assertNull(theOldestPerson);
+    }
+
+    @Test
+    public void calculateDaysBetweenTwoPeopleDateOfBirthOK() throws AddressBookNoFoundException {
         assertEquals(-2862, searchService.calculateDaysBetweenTwoPeopleDateOfBirth("Bill McKnight", "Paul Robinson"));
+    }
+
+    @Test (expected = AddressBookNoFoundException.class)
+    public void calculateDaysBetweenTwoPeopleDateOfBirthNoFoundException() throws Exception {
+        searchService.calculateDaysBetweenTwoPeopleDateOfBirth("No Found", "Paul Robinson");
     }
 }

@@ -1,5 +1,6 @@
 package com.gumtree.book.service;
 
+import com.gumtree.book.exception.AddressBookNoFoundException;
 import com.gumtree.book.file.FileParser;
 import com.gumtree.book.model.AddressBook;
 import com.gumtree.book.model.Gender;
@@ -37,20 +38,20 @@ public class SearchServiceImpl implements SearchService {
         }
     }
 
-    public long calculateDaysBetweenTwoPeopleDateOfBirth(String fullName1, String fullName2) {
+    public long calculateDaysBetweenTwoPeopleDateOfBirth(String fullName1, String fullName2) throws AddressBookNoFoundException {
         AddressBook firstPerson = findPersonByFullName(fullName1);
         AddressBook secondPerson = findPersonByFullName(fullName2);
         return DateUtils.caculateDaysBetweenTwoDates(firstPerson.getDateOfBirth(), secondPerson.getDateOfBirth());
     }
 
-    private AddressBook findPersonByFullName(String fullName)  {
+    private AddressBook findPersonByFullName(String fullName) throws AddressBookNoFoundException {
         List<AddressBook> addressBooks = fileParser.readDataFromFile();
         if (addressBooks.isEmpty()) {
             return null;
         } else {
             Optional<AddressBook> addressBook = fileParser.readDataFromFile().stream().filter(a -> a.getFullName().equals(fullName)).findFirst();
             if (!addressBook.isPresent()) {
-                return null;
+                throw new AddressBookNoFoundException();
             }
             return addressBook.get();
         }

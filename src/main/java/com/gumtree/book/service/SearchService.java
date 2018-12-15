@@ -1,5 +1,6 @@
 package com.gumtree.book.service;
 
+import com.gumtree.book.exception.AddressBookNoFoundException;
 import com.gumtree.book.model.AddressBook;
 import com.gumtree.book.model.Gender;
 
@@ -26,7 +27,8 @@ public interface SearchService {
      * @param fullName1
      * @param fullName2
      * @return number of days
+     * @throws AddressBookNoFoundException
      */
-    long calculateDaysBetweenTwoPeopleDateOfBirth(final String fullName1, final String fullName2);
+    long calculateDaysBetweenTwoPeopleDateOfBirth(final String fullName1, final String fullName2) throws AddressBookNoFoundException;
 
 }
