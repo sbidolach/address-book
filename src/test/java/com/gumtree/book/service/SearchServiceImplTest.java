@@ -48,6 +48,6 @@ public class SearchServiceImplTest {
 
     @Test
     public void calculateDaysBetweenTwoPeopleDateOfBirthOK() {
-        assertEquals(2862, searchService.calculateDaysBetweenTwoPeopleDateOfBirth("Bill McKnight", "Paul Robinson"));
+        assertEquals(-2862, searchService.calculateDaysBetweenTwoPeopleDateOfBirth("Bill McKnight", "Paul Robinson"));
     }
 }
