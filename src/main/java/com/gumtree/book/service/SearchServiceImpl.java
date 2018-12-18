@@ -41,7 +41,7 @@ public class SearchServiceImpl implements SearchService {
     public long calculateDaysBetweenTwoPeopleDateOfBirth(String fullName1, String fullName2) throws AddressBookNoFoundException {
         AddressBook firstPerson = findPersonByFullName(fullName1);
         AddressBook secondPerson = findPersonByFullName(fullName2);
-        return DateUtils.caculateDaysBetweenTwoDates(firstPerson.getDateOfBirth(), secondPerson.getDateOfBirth());
+        return DateUtils.calculateDaysBetweenTwoDates(firstPerson.getDateOfBirth(), secondPerson.getDateOfBirth());
     }
 
     private AddressBook findPersonByFullName(String fullName) throws AddressBookNoFoundException {

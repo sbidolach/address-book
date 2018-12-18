@@ -16,7 +16,7 @@ public class DateUtils {
         }
     }
 
-    public static long caculateDaysBetweenTwoDates(Date d1, Date d2) {
+    public static long calculateDaysBetweenTwoDates(Date d1, Date d2) {
         long diff = d1.getTime() - d2.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
