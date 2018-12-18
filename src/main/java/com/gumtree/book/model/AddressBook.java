@@ -1,18 +1,11 @@
 package com.gumtree.book.model;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.Date;
 
 public class AddressBook {
 
-    @NotNull
     private String fullName;
-
-    @NotNull
     private Gender gender;
-
-    @NotNull
     private Date dateOfBirth;
 
     public AddressBook(String fullName, Gender gender, Date dateOfBirth) {
